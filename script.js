@@ -70,14 +70,14 @@ var i = 0; //ID用変数
 
     //作業中が押された時完了に変更する機能
     function changeValue(){
-        work.value = "完了";
-        work.id = "end";
+        this.id = "end";
+        this.value = "完了";
     }
         
 
 //削除が押された時に親要素を削除する機能
 function deletePar(){
-    document.parentElement()
+    this.parentNode.parentNodemusic1.remove();
 };
         
 
