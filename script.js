@@ -13,48 +13,71 @@ var i = 0; //ID用変数
         const todo = document.getElementById('todo');
         const task = document.getElementById('task').value;
 
-        const trst = '<tr class="trtag">' //trを作成
-        const id = "<td>" + i + "</td>"; //IDを作成
+        //新しいtrタグを作成
+        const trst = document.createElement('tr')
+        trst.id = "trtag" + i;
 
-        job.push(task); //入力されたタスクを配列に追加する。
-        const to = "<td>" + task + "</td>"; //タスクを表示
-
-        const work= "<td>" + '<input type="button"  id="work' + i + '" value="作業中">'  + "</td>"; //作業中ボタンを作詞
-
-        const del = "<td>" + '<input type="button" id="del' + i + '" value="削除">'  + "</td>"; //削除ボタンを作成
-
-        const tren = "</tr>" 
-        todo.insertAdjacentHTML('beforeend',trst + id + to + work + del + tren); //表示させる
+        //作ったtrタグをtbodyに追加する
+        const objBody = document.getElementsByTagName("tbody").item(0); 
+        objBody.appendChild(trst);
         
-        //作成した作業中及び削除のID取得する
+        //IDを作成
+        const tdId = document.createElement('td') ;
+        tdId.innerHTML = i;  
 
-        // const job = document.getElementById();  
-        // const era = document.getElementById(); 
+        //作ったtrを取得して追加
+        const trTag = document.getElementById("trtag" + i); 
+        trTag.appendChild(tdId);
 
-        // 取得したIDに機能を追加する
-        // job.addEventListener("click" , chageVal); 
-        // era.addEventListener("click" , deletePar); 
+        
+        job.push(task); //入力されたタスクを配列に追加する。
 
-        //IDの値を増やす
+        //タスク用tdを作成して入力されたタスクを入れる。
+        const tdTo = document.createElement('td');
+        tdTo.innerHTML = task; 
+
+        //trに追加する
+        trTag.appendChild(tdTo);
+
+        //tdを作成して「削除中」のボタンを作成する。
+        const tdWork = document.createElement('td');
+        const work = document.createElement('input');
+        work.type = "button";
+        work.class = "work";
+        work.value = "作業中";
+        work.addEventListener("click", changeValue);
+
+        //tdをtrに追加して、tdに作業中を追加する
+        trTag.appendChild(tdWork);
+        tdWork.appendChild(work);
+
+        ////tdを作成して「削除」のボタンを作成する。
+        const tdDel = document.createElement('td');
+        const del = document.createElement('input');
+        del.type = "button";
+        del.id = "del" + i;
+        del.value = "削除";
+        del.addEventListener("click", deletePar);
+
+        trTag.appendChild(tdDel);
+        tdDel.appendChild(del);
+
         i++;
 
         
         
 });
 
-
-//作業中が押された時完了に変更する機能
-function chageval(){
-
-
-    //  .value = "完了" ;
-    //  .class = "end" ;
-};
-
+    //作業中が押された時完了に変更する機能
+    function changeValue(){
+        work.value = "完了";
+        work.id = "end";
+    }
+        
 
 //削除が押された時に親要素を削除する機能
 function deletePar(){
-
+    document.parentElement()
 };
         
 
